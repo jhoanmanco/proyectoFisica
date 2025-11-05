@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Dinámico - Física Interactiva</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="navbar"></h1>
+    <h1>Física Interactiva</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="calculadora.html">Simulación</a>
+      <a href="quizes.html">Quizes</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h2 id="quizTitle">Quiz</h2>
+    <p id="quizDescription">Prueba tus conocimientos.</p>
+
+    <form id="quizForm">
+      <!-- Preguntas se cargarán aquí -->
+    </form>
+
+    <div id="resultBox" class="hidden">
+      <h3>Resultado:</h3>
+      <p id="scoreText"></p>
+      <button onclick="window.location.href='quizes.html'" class="btn-secondary">Volver a la lista de Quizes</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Física Interactiva. Aprende con simulaciones y práctica.</p>
+  </footer>
+
+  <script>
+    // Lista de quizes con preguntas
+    const quizzes = {
+      1: {
+        title: "Conceptos Básicos",
+        description: "Test sobre magnitud, dirección y tipos de vectores.",
+        questions: [
+          {
+            q: "¿Qué es un vector?",
+            a: "Una cantidad con magnitud y dirección",
+            options: ["Una cantidad que solo tiene magnitud", "Una cantidad con magnitud y dirección", "Una línea recta sin sentido físico"],
+            explanation: [
+              "Incorrecto. Una cantidad que solo tiene magnitud es un escalar.",
+              "Correcto. Un vector tiene magnitud y dirección.",
+              "Incorrecto. Una línea sin sentido físico no define un vector."
+            ]
+          },
+          {
+            q: "¿Qué representa la longitud de un vector?",
+            a: "Su magnitud",
+            options: ["Su dirección", "Su magnitud", "Su posición en el plano"],
+            explanation: [
+              "Incorrecto. La dirección no depende de la longitud.",
+              "Correcto. La longitud representa la magnitud del vector.",
+              "Incorrecto. La posición no determina la magnitud."
+            ]
+          },
+          {
+            q: "¿Qué vector anula el efecto de otro?",
+            a: "El equilibrante",
+            options: ["El equilibrante", "El unitario", "El resultante"],
+            explanation: [
+              "Correcto. El equilibrante tiene igual magnitud y sentido opuesto a la resultante.",
+              "Incorrecto. El vector unitario solo tiene magnitud 1, no equilibra otro vector.",
+              "Incorrecto. La resultante es la suma de vectores, no los anula."
+            ]
+          },
+        ]
+      },
+      2: {
+        title: "Suma y Resultantes",
+        description: "Prueba tus habilidades calculando resultantes de vectores.",
+        questions: [
+          {
+            q: "Si un vector apunta al este y otro al norte, ¿qué tipo de vectores son?",
+            a: "Perpendiculares",
+            options: ["Paralelos", "Colineales", "Perpendiculares"],
+            explanation: [
+              "Incorrecto. Vectores paralelos tienen la misma dirección o dirección opuesta.",
+              "Incorrecto. Colineales significa que están sobre la misma línea.",
+              "Correcto. Un vector hacia el este y otro hacia el norte forman un ángulo de 90°, por lo que son perpendiculares."
+            ]
+          },
+          {
+            q: "La resultante de dos vectores de igual magnitud y sentidos opuestos es:",
+            a: "Cero",
+            options: ["Cero", "Igual a uno de los vectores", "La suma de sus magnitudes"],
+            explanation: [
+              "Correcto. Si los vectores tienen igual magnitud y sentidos opuestos, se cancelan y la resultante es cero.",
+              "Incorrecto. La resultante no será igual a uno de los vectores, se anulan.",
+              "Incorrecto. No se suman magnitudes directamente cuando los sentidos son opuestos."
+            ]
+          },
+          {
+            q: "Cuando se suman dos vectores de diferentes magnitudes y ángulos, la resultante se obtiene:",
+            a: "Usando la regla del paralelogramo o cabeza-cola",
+            options: ["Sumando sus magnitudes directamente", "Usando la regla del paralelogramo o cabeza-cola", "Restando sus magnitudes"],
+            explanation: [
+              "Incorrecto. No se suman directamente si tienen diferente dirección.",
+              "Correcto. Se puede usar el método cabeza-cola o paralelogramo para obtener la resultante.",
+              "Incorrecto. Restar magnitudes solo aplica si están en línea recta y sentidos opuestos."
+            ]
+          }
+        ]
+      },
+      3: {
+        title: "Vectores Equilibrantes",
+        description: "Aprende a identificar vectores equilibrantes y su uso.",
+        questions: [
+          {
+            q: "El vector equilibrante tiene la misma magnitud que la resultante pero:",
+            a: "Sentido opuesto",
+            options: ["Sentido opuesto", "Misma dirección", "Ninguna relación"],
+            explanation: [
+              "Correcto. El equilibrante se usa para balancear fuerzas y apunta en sentido contrario a la resultante.",
+              "Incorrecto. No tiene la misma dirección que la resultante, sino opuesta.",
+              "Incorrecto. Sí existe una relación directa: equilibra la resultante."
+            ]
+          },
+          {
+            q: "¿Para qué se utiliza un vector equilibrante?",
+            a: "Para equilibrar fuerzas",
+            options: ["Para aumentar fuerza", "Para equilibrar fuerzas", "Para medir ángulos"],
+            explanation: [
+              "Incorrecto. No se usa para aumentar la fuerza.",
+              "Correcto. El equilibrante se aplica para que el sistema quede en equilibrio.",
+              "Incorrecto. No se usa para medir ángulos, su función es física, no geométrica."
+            ]
+          },
+          {
+            q: "Si tres vectores se suman y se desea que el sistema quede en equilibrio, el equilibrante:",
+            a: "Debe tener magnitud igual a la resultante de los tres vectores y sentido opuesto",
+            options: [
+              "Debe ser cero",
+              "Debe tener magnitud igual a la resultante de los tres vectores y sentido opuesto",
+              "Debe apuntar al mismo ángulo que uno de los vectores"
+            ],
+            explanation: [
+              "Incorrecto. El equilibrante nunca será cero a menos que la resultante ya sea cero.",
+              "Correcto. Para equilibrar, debe tener magnitud igual a la resultante y sentido opuesto.",
+              "Incorrecto. No basta con apuntar igual que uno de los vectores, debe cancelar la resultante."
+            ]
+          }
+        ]
+      }
+    };
+
+    // Obtener id del quiz desde URL
+    const params = new URLSearchParams(window.location.search);
+    const quizId = params.get("id");
+    const quiz = quizzes[quizId];
+
+    const titleEl = document.getElementById("quizTitle");
+    const descEl = document.getElementById("quizDescription");
+    const form = document.getElementById("quizForm");
+    const resultBox = document.getElementById("resultBox");
+    const scoreText = document.getElementById("scoreText");
+
+    if (!quiz) {
+      titleEl.textContent = "Quiz no encontrado";
+      form.innerHTML = "<p>El quiz que buscas no existe.</p>";
+    } else {
+      titleEl.textContent = `Quiz ${quizId}: ${quiz.title}`;
+      descEl.textContent = quiz.description;
+
+      // Crear preguntas dinámicamente
+      quiz.questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.classList.add("question");
+        div.innerHTML = `<h3>${i + 1}️) ${q.q}</h3>`;
+
+        q.options.forEach((opt, idx) => {
+          div.innerHTML += `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`;
+        });
+
+        // Div donde se mostrará la retroalimentación
+        const feedbackDiv = document.createElement("div");
+        feedbackDiv.classList.add("feedback");
+        feedbackDiv.style.marginTop = "8px";
+        feedbackDiv.style.fontStyle = "italic";
+        div.appendChild(feedbackDiv);
+
+        form.appendChild(div);
+      });
+
+      // Botón de enviar
+      const submitBtn = document.createElement("button");
+      submitBtn.type = "submit";
+      submitBtn.classList.add("btn-primary");
+      submitBtn.textContent = "Comprobar Respuestas";
+      form.appendChild(submitBtn);
+
+      // Evento submit
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let score = 0;
+
+        quiz.questions.forEach((q, i) => {
+          const selected = form.querySelector(`input[name="q${i}"]:checked`);
+          const div = form.querySelector(`input[name="q${i}"]`).closest(".question");
+          const feedbackDiv = div.querySelector(".feedback");
+          div.classList.remove("correct", "incorrect");
+
+          if (selected) {
+            if (selected.value === q.a) {
+              score++;
+              div.classList.add("correct");
+            } else {
+              div.classList.add("incorrect");
+            }
+
+            // Buscar índice de la opción seleccionada para mostrar explicación
+            const selectedIndex = q.options.indexOf(selected.value);
+            feedbackDiv.textContent = q.explanation[selectedIndex];
+            feedbackDiv.style.color = selected.value === q.a ? "green" : "red";
+          }
+        });
+
+        const percent = Math.round((score / quiz.questions.length) * 100);
+        scoreText.textContent = `Tu puntaje es ${score}/${quiz.questions.length} (${percent}%)`;
+        resultBox.classList.remove("hidden");
+        window.scrollTo({ top: resultBox.offsetTop, behavior: 'smooth' });
+      });
+
+    }
+  </script>
+</body>
+
+</html>

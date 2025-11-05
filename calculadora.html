@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Vectores - Física</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <h1>Calculadora Interactiva</h1>
+    <p style="margin:0; font-size:1rem; font-weight:300;">Simula, calcula y visualiza la resultante de varios vectores.</p>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="quizes.html">Quizes</a>
+    </nav>
+  </header>
+
+  <main class="mesa">
+    <section class="controls">
+      <label>
+        <span>Fuerza (g):</span>
+        <input type="number" id="magnitude" value="0" min="0">
+      </label>
+
+      <label>
+        <span>Ángulo (°):</span>
+        <input type="number" id="angle" value="0" min="0" max="360">
+      </label>
+
+      <div class="btn-group">
+        <button id="addVector"> Agregar Fuerza</button>
+        <button id="clearVectors"> Limpiar</button>
+        <button id="showResult">Mostrar Resultante</button>
+      </div>
+    </section>
+
+    <section id="vectorTableContainer">
+      <h2>Vectores ingresados</h2>
+      <table id="vectorTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Magnitud (g)</th>
+            <th>Ángulo (°)</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Mesa Experimental</h2>
+      <canvas id="forceTable" width="600" height="600"></canvas>
+    </section>
+
+    <section id="result">
+      <h2>Resultados</h2>
+      <p><strong>Resultante:</strong> <span id="resultant">0 g</span></p>
+      <p><strong>Ángulo:</strong> <span id="resultantAngle">0°</span></p>
+    </section>
+
+    <section>
+      <h2>Mesa Teórica (Diagrama cabeza-cola)</h2>
+      <canvas id="resultCanvas" width="600" height="600" style="display:none;"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Laboratorio Virtual de Física Vectores y Fuerzas</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

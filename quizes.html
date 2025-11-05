@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizes - Física Interactiva</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <h1>Física Interactiva</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="calculadora.html">Simulación</a>
+    </nav>
+  </header>
+
+  
+  <main class="content">
+    <h2> Elige un Quiz</h2>
+    <p>Selecciona uno de los quizes disponibles para practicar tus conocimientos sobre vectores.</p>
+
+    <div id="quizList" class="quiz-list">
+      <!-- Las cards se llenarán dinámicamente -->
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Física Interactiva. Aprende con simulaciones y práctica.</p>
+  </footer>
+
+  <script>
+    // Array con los quizes disponibles
+    const quizzes = [
+      {
+        id: 1,
+        title: "Conceptos Básicos",
+        description: "Test sobre magnitud, dirección y tipos de vectores."
+      },
+      {
+        id: 2,
+        title: "Suma y Resultantes",
+        description: "Prueba tus habilidades calculando resultantes de vectores."
+      },
+      {
+        id: 3,
+        title: "Vectores Equilibrantes",
+        description: "Aprende a identificar vectores equilibrantes y su uso."
+      }
+    ];
+
+    const quizList = document.getElementById("quizList");
+
+    quizzes.forEach(q => {
+      const card = document.createElement("div");
+      card.classList.add("quiz-card");
+      card.innerHTML = `
+        <h3>Quiz ${q.id}: ${q.title}</h3>
+        <p>${q.description}</p>
+        <button onclick="window.location.href='quiz.html?id=${q.id}'" class="btn-primary">Iniciar Quiz</button>
+      `;
+      quizList.appendChild(card);
+    });
+  </script>
+</body>
+</html>
