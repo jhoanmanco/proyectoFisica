@@ -87,12 +87,22 @@ function updateVectorTable() {
     }
   }
 
+  function getScaleFactor(context, list) {
+  if (list.length === 0) return 1;
+  const R = context.canvas.width / 2 - 50; // margen
+  const maxMag = Math.max(...list.map(v => v.magnitude));
+  return maxMag > 0 ? R / maxMag : 1;
+}
+
+
   // Dibuja vectores desde el centro
   function drawVectors(context, list) {
   const c = { x: context.canvas.width / 2, y: context.canvas.height / 2 };
+  const scale = getScaleFactor(context, list);
+
   list.forEach((v, i) => {
-    const endX = c.x + v.magnitude * Math.cos(v.angle * Math.PI / 180);
-    const endY = c.y - v.magnitude * Math.sin(v.angle * Math.PI / 180);
+    const endX = c.x + (v.magnitude * scale) * Math.cos(v.angle * Math.PI / 180);
+    const endY = c.y - (v.magnitude * scale) * Math.sin(v.angle * Math.PI / 180);
 
     // Vector
     context.beginPath();
@@ -113,7 +123,7 @@ function updateVectorTable() {
     context.fillStyle = v.color;
     context.fill();
 
-    // Texto con F#, magnitud y ángulo
+    // Texto
     context.font = "bold 12px Segoe UI";
     context.fillStyle = "#000";
     context.fillText(`F${i + 1} ${v.magnitude} g ${v.angle}°`, endX + 5, endY);
@@ -121,14 +131,16 @@ function updateVectorTable() {
 }
 
 
+
   // Dibuja el diagrama cabeza-cola
   function drawHeadToTail(context, list) {
   const c = { x: context.canvas.width / 2, y: context.canvas.height / 2 };
+  const scale = getScaleFactor(context, list);
   let start = { ...c };
 
   list.forEach((v, i) => {
-    const endX = start.x + v.magnitude * Math.cos(v.angle * Math.PI / 180);
-    const endY = start.y - v.magnitude * Math.sin(v.angle * Math.PI / 180);
+    const endX = start.x + (v.magnitude * scale) * Math.cos(v.angle * Math.PI / 180);
+    const endY = start.y - (v.magnitude * scale) * Math.sin(v.angle * Math.PI / 180);
 
     // Componentes punteadas
     context.setLineDash([4, 4]);
@@ -142,7 +154,6 @@ function updateVectorTable() {
     context.moveTo(endX, start.y);
     context.lineTo(endX, endY);
     context.stroke();
-
     context.setLineDash([]);
 
     // Vector
@@ -170,47 +181,53 @@ function updateVectorTable() {
     start = { x: endX, y: endY };
   });
 
-  // Dibujar resultante desde el centro
+  // Resultante
   const { resultant, angle } = calculateResultant(list);
-  const endX = c.x + resultant * Math.cos(angle * Math.PI / 180);
-  const endY = c.y - resultant * Math.sin(angle * Math.PI / 180);
+  const endX = c.x + (resultant * scale) * Math.cos(angle * Math.PI / 180);
+  const endY = c.y - (resultant * scale) * Math.sin(angle * Math.PI / 180);
+
   context.beginPath();
   context.moveTo(c.x, c.y);
   context.lineTo(endX, endY);
   context.strokeStyle = "red";
   context.lineWidth = 2.5;
   context.stroke();
-  context.fillStyle = "red";
 
-
-  // --- NUEVO: marcador del ángulo en la circunferencia ---
-  const R = context.canvas.width / 2 - 10; // radio de la rueda
+  // Marcador del ángulo
+  const R = context.canvas.width / 2 - 10;
   const rad = angle * Math.PI / 180;
   const mx = c.x + R * Math.cos(rad);
   const my = c.y - R * Math.sin(rad);
 
   context.beginPath();
-  context.arc(mx, my, 5, 0, Math.PI * 2); // puntito rojo
+  context.arc(mx, my, 5, 0, Math.PI * 2);
   context.fillStyle = "red";
   context.fill();
 
   context.font = "bold 12px Segoe UI";
-  context.fillText(`${angle.toFixed(1)}°`, mx + 8, my - 5); // ángulo en rojo
+  context.fillText(`${angle.toFixed(1)}°`, mx + 8, my - 5);
 }
 
 
+
   function calculateResultant(list = vectors) {
-    let sumX = 0, sumY = 0;
-    list.forEach(v => {
-      sumX += v.magnitude * Math.cos(v.angle * Math.PI / 180);
-      sumY += v.magnitude * Math.sin(v.angle * Math.PI / 180);
-    });
-    const resultant = Math.sqrt(sumX ** 2 + sumY ** 2);
-    const angle = Math.atan2(sumY, sumX) * 180 / Math.PI;
-    resultMag.textContent = `${resultant.toFixed(2)} g`;
-    resultAng.textContent = `${angle.toFixed(2)}°`;
-    return { resultant, angle };
-  }
+  let sumX = 0, sumY = 0;
+  list.forEach(v => {
+    sumX += v.magnitude * Math.cos(v.angle * Math.PI / 180);
+    sumY += v.magnitude * Math.sin(v.angle * Math.PI / 180);
+  });
+
+  const resultant = Math.sqrt(sumX ** 2 + sumY ** 2);
+  let angle = Math.atan2(sumY, sumX) * 180 / Math.PI;
+
+  // 🔧 Convertir ángulo negativo a positivo (0°–360°)
+  if (angle < 0) angle += 360;
+
+  resultMag.textContent = `${resultant.toFixed(2)} g`;
+  resultAng.textContent = `${angle.toFixed(2)}°`;
+
+  return { resultant, angle };
+}
 
   // Eventos
   document.getElementById("addVector").addEventListener("click", () => {
