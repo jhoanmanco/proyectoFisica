@@ -2,237 +2,1002 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Dinámico - Física Interactiva</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Dinámico - Física Interactiva</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header class="navbar"></h1>
-    <h1>Física Interactiva</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="calculadora.html">Simulación</a>
-      <a href="quizes.html">Quizes</a>
-    </nav>
-  </header>
+  <header class="navbar"></h1>
+    <h1>Física Interactiva</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="calculadora.html">Simulación</a>
+      <a href="quizes.html">Quizes</a>
+    </nav>
+  </header>
 
-  <main class="content">
-    <h2 id="quizTitle">Quiz</h2>
-    <p id="quizDescription">Prueba tus conocimientos.</p>
+  <main class="content">
+    <h2 id="quizTitle">Quiz</h2>
+    <p id="quizDescription">Prueba tus conocimientos.</p>
 
-    <form id="quizForm">
-      <!-- Preguntas se cargarán aquí -->
-    </form>
+    <form id="quizForm">
+          </form>
 
-    <div id="resultBox" class="hidden">
-      <h3>Resultado:</h3>
-      <p id="scoreText"></p>
-      <button onclick="window.location.href='quizes.html'" class="btn-secondary">Volver a la lista de Quizes</button>
-    </div>
-  </main>
+    <div id="resultBox" class="hidden">
+      <h3>Resultado:</h3>
+      <p id="scoreText"></p>
+      <button onclick="window.location.href='quizes.html'" class="btn-secondary">Volver a la lista de Quizes</button>
+    </div>
+  </main>
 
-  <footer>
-    <p>© 2025 Física Interactiva. Aprende con simulaciones y práctica.</p>
-  </footer>
+  <footer>
+    <p>© 2025 Física Interactiva. Aprende con simulaciones y práctica.</p>
+  </footer>
 
-  <script>
-    // Lista de quizes con preguntas
-    const quizzes = {
-      1: {
-        title: "Conceptos Básicos",
-        description: "Test sobre magnitud, dirección y tipos de vectores.",
-        questions: [
-          {
-            q: "¿Qué es un vector?",
-            a: "Una cantidad con magnitud y dirección",
-            options: ["Una cantidad que solo tiene magnitud", "Una cantidad con magnitud y dirección", "Una línea recta sin sentido físico"],
-            explanation: [
-              "Incorrecto. Una cantidad que solo tiene magnitud es un escalar.",
-              "Correcto. Un vector tiene magnitud y dirección.",
-              "Incorrecto. Una línea sin sentido físico no define un vector."
-            ]
-          },
-          {
-            q: "¿Qué representa la longitud de un vector?",
-            a: "Su magnitud",
-            options: ["Su dirección", "Su magnitud", "Su posición en el plano"],
-            explanation: [
-              "Incorrecto. La dirección no depende de la longitud.",
-              "Correcto. La longitud representa la magnitud del vector.",
-              "Incorrecto. La posición no determina la magnitud."
-            ]
-          },
-          {
-            q: "¿Qué vector anula el efecto de otro?",
-            a: "El equilibrante",
-            options: ["El equilibrante", "El unitario", "El resultante"],
-            explanation: [
-              "Correcto. El equilibrante tiene igual magnitud y sentido opuesto a la resultante.",
-              "Incorrecto. El vector unitario solo tiene magnitud 1, no equilibra otro vector.",
-              "Incorrecto. La resultante es la suma de vectores, no los anula."
-            ]
-          },
-        ]
-      },
-      2: {
-        title: "Suma y Resultantes",
-        description: "Prueba tus habilidades calculando resultantes de vectores.",
-        questions: [
-          {
-            q: "Si un vector apunta al este y otro al norte, ¿qué tipo de vectores son?",
-            a: "Perpendiculares",
-            options: ["Paralelos", "Colineales", "Perpendiculares"],
-            explanation: [
-              "Incorrecto. Vectores paralelos tienen la misma dirección o dirección opuesta.",
-              "Incorrecto. Colineales significa que están sobre la misma línea.",
-              "Correcto. Un vector hacia el este y otro hacia el norte forman un ángulo de 90°, por lo que son perpendiculares."
-            ]
-          },
-          {
-            q: "La resultante de dos vectores de igual magnitud y sentidos opuestos es:",
-            a: "Cero",
-            options: ["Cero", "Igual a uno de los vectores", "La suma de sus magnitudes"],
-            explanation: [
-              "Correcto. Si los vectores tienen igual magnitud y sentidos opuestos, se cancelan y la resultante es cero.",
-              "Incorrecto. La resultante no será igual a uno de los vectores, se anulan.",
-              "Incorrecto. No se suman magnitudes directamente cuando los sentidos son opuestos."
-            ]
-          },
-          {
-            q: "Cuando se suman dos vectores de diferentes magnitudes y ángulos, la resultante se obtiene:",
-            a: "Usando la regla del paralelogramo o cabeza-cola",
-            options: ["Sumando sus magnitudes directamente", "Usando la regla del paralelogramo o cabeza-cola", "Restando sus magnitudes"],
-            explanation: [
-              "Incorrecto. No se suman directamente si tienen diferente dirección.",
-              "Correcto. Se puede usar el método cabeza-cola o paralelogramo para obtener la resultante.",
-              "Incorrecto. Restar magnitudes solo aplica si están en línea recta y sentidos opuestos."
-            ]
-          }
-        ]
-      },
-      3: {
-        title: "Vectores Equilibrantes",
-        description: "Aprende a identificar vectores equilibrantes y su uso.",
-        questions: [
-          {
-            q: "El vector equilibrante tiene la misma magnitud que la resultante pero:",
-            a: "Sentido opuesto",
-            options: ["Sentido opuesto", "Misma dirección", "Ninguna relación"],
-            explanation: [
-              "Correcto. El equilibrante se usa para balancear fuerzas y apunta en sentido contrario a la resultante.",
-              "Incorrecto. No tiene la misma dirección que la resultante, sino opuesta.",
-              "Incorrecto. Sí existe una relación directa: equilibra la resultante."
-            ]
-          },
-          {
-            q: "¿Para qué se utiliza un vector equilibrante?",
-            a: "Para equilibrar fuerzas",
-            options: ["Para aumentar fuerza", "Para equilibrar fuerzas", "Para medir ángulos"],
-            explanation: [
-              "Incorrecto. No se usa para aumentar la fuerza.",
-              "Correcto. El equilibrante se aplica para que el sistema quede en equilibrio.",
-              "Incorrecto. No se usa para medir ángulos, su función es física, no geométrica."
-            ]
-          },
-          {
-            q: "Si tres vectores se suman y se desea que el sistema quede en equilibrio, el equilibrante:",
-            a: "Debe tener magnitud igual a la resultante de los tres vectores y sentido opuesto",
-            options: [
-              "Debe ser cero",
-              "Debe tener magnitud igual a la resultante de los tres vectores y sentido opuesto",
-              "Debe apuntar al mismo ángulo que uno de los vectores"
-            ],
-            explanation: [
-              "Incorrecto. El equilibrante nunca será cero a menos que la resultante ya sea cero.",
-              "Correcto. Para equilibrar, debe tener magnitud igual a la resultante y sentido opuesto.",
-              "Incorrecto. No basta con apuntar igual que uno de los vectores, debe cancelar la resultante."
-            ]
-          }
-        ]
-      }
-    };
+  <script>
+    // Lista de quizes con preguntas - Expandida a 6 quizes de 10 preguntas
+    const quizzes = {
+      1: {
+        title: "Conceptos Básicos",
+        description: "Test sobre magnitud, dirección y tipos de vectores. (10 preguntas)",
+        questions: [
+          { 
+            q: "¿Qué es un vector?", 
+            a: "Una cantidad con magnitud y dirección", 
+            options: [
+              "Una cantidad que solo tiene magnitud", 
+              "Una cantidad con magnitud y dirección", 
+              "Una línea recta sin sentido físico"
+            ], 
+            explanation: [
+              "Incorrecto. Una cantidad que solo tiene magnitud es un escalar.", 
+              "Correcto. Un vector tiene magnitud y dirección.", 
+              "Incorrecto. Una línea sin sentido físico no define un vector." 
+            ] 
+          },
+          { 
+            q: "¿Qué representa la longitud de un vector?", 
+            a: "Su magnitud", 
+            options: [
+              "Su dirección", 
+              "Su magnitud", 
+              "Su posición en el plano"
+            ], 
+            explanation: [
+              "Incorrecto. La dirección no depende de la longitud.", 
+              "Correcto. La longitud representa la magnitud del vector.", 
+              "Incorrecto. La posición no determina la magnitud."
+            ] 
+          },
+          { 
+            q: "¿Qué vector anula el efecto de otro?", 
+            a: "El equilibrante", 
+            options: [
+              "El equilibrante", 
+              "El unitario", 
+              "El resultante"
+            ], 
+            explanation: [
+              "Correcto. El equilibrante tiene igual magnitud y sentido opuesto a la resultante.", 
+              "Incorrecto. El vector unitario solo tiene magnitud 1, no equilibra otro vector.", 
+              "Incorrecto. La resultante es la suma de vectores, no los anula."
+            ] 
+          },
+          { 
+            q: "¿Qué unidad NO es vectorial?", 
+            a: "Masa", 
+            options: [
+              "Aceleración", 
+              "Fuerza", 
+              "Masa"
+            ], 
+            explanation: [
+              "Incorrecto. La aceleración es vectorial.", 
+              "Incorrecto. La fuerza es vectorial.", 
+              "Correcto. La masa es una magnitud escalar."
+            ] 
+          },
+          { 
+            q: "¿Qué define la dirección de un vector en un plano?", 
+            a: "El ángulo respecto a un eje de referencia", 
+            options: [
+              "Su punto de origen", 
+              "La magnitud", 
+              "El ángulo respecto a un eje de referencia"
+            ], 
+            explanation: [
+              "Incorrecto. El origen es el punto de aplicación.", 
+              "Incorrecto. La magnitud es la longitud.", 
+              "Correcto. El ángulo define la dirección y el sentido." 
+            ] 
+          },
+          { 
+            q: "¿Cómo se llama un vector con magnitud igual a cero?", 
+            a: "Vector nulo", 
+            options: [
+              "Vector unitario", 
+              "Vector cero", 
+              "Vector nulo"
+            ], 
+            explanation: [
+              "Incorrecto. El unitario tiene magnitud 1.", 
+              "Parcialmente correcto, pero 'nulo' es el término formal.", 
+              "Correcto. El vector nulo tiene magnitud cero." 
+            ] 
+          },
+          { 
+            q: "¿Dos vectores son equipolentes si tienen?", 
+            a: "Igual magnitud, dirección y sentido", 
+            options: [
+              "Igual magnitud y sentido opuesto", 
+              "Igual magnitud, dirección y sentido", 
+              "Solo igual magnitud"
+            ], 
+            explanation: [
+              "Incorrecto. Serían opuestos.", 
+              "Correcto. Equipolente significa que son iguales en todo.", 
+              "Incorrecto. No basta con la magnitud." 
+            ] 
+          },
+          { 
+            q: "¿Qué es una magnitud escalar?", 
+            a: "Una cantidad definida solo por su magnitud", 
+            options: [
+              "Una cantidad con magnitud y sentido", 
+              "Una cantidad definida solo por su magnitud", 
+              "Una cantidad que siempre es positiva"
+            ], 
+            explanation: [
+              "Incorrecto. Esto es un vector.", 
+              "Correcto. Los escalares solo necesitan un valor y una unidad.", 
+              "Incorrecto. No necesariamente es positiva."
+            ] 
+          },
+          { 
+            q: "¿En qué cuadrante un vector tiene componentes 'x' negativa y 'y' positiva?", 
+            a: "Segundo cuadrante", 
+            options: [
+              "Primer cuadrante", 
+              "Segundo cuadrante", 
+              "Tercer cuadrante"
+            ], 
+            explanation: [
+              "Incorrecto. Ambos son positivos.", 
+              "Correcto. El segundo cuadrante va de 90° a 180°.", 
+              "Incorrecto. Ambos son negativos."
+            ] 
+          },
+          { 
+            q: "¿Qué significa el sentido de un vector?", 
+            a: "La orientación de la flecha", 
+            options: [
+              "La longitud total del vector", 
+              "La inclinación del vector", 
+              "La orientación de la flecha"
+            ], 
+            explanation: [
+              "Incorrecto. Es la magnitud.", 
+              "Incorrecto. Es la dirección.", 
+              "Correcto. El sentido es hacia dónde apunta la flecha." 
+            ] 
+          }
+        ]
+      },
+      2: {
+        title: "Suma y Resultantes",
+        description: "Prueba tus habilidades calculando resultantes de vectores. (10 preguntas)",
+        questions: [
+          { 
+            q: "Si un vector apunta al este y otro al norte, ¿qué tipo de vectores son?", 
+            a: "Perpendiculares", 
+            options: [
+              "Paralelos", 
+              "Colineales", 
+              "Perpendiculares"
+            ], 
+            explanation: [
+              "Incorrecto. Vectores paralelos tienen la misma dirección o dirección opuesta.", 
+              "Incorrecto. Colineales significa que están sobre la misma línea.", 
+              "Correcto. Forman un ángulo de 90°." 
+            ] 
+          },
+          { 
+            q: "La resultante de dos vectores de igual magnitud y sentidos opuestos es:", 
+            a: "Cero", 
+            options: [
+              "Cero", 
+              "Igual a uno de los vectores", 
+              "La suma de sus magnitudes"
+            ], 
+            explanation: [
+              "Correcto. Si los vectores se cancelan, la resultante es cero.", 
+              "Incorrecto. Se anulan.", 
+              "Incorrecto. No se suman magnitudes directamente."
+            ] 
+          },
+          { 
+            q: "Cuando se suman dos vectores de diferentes magnitudes y ángulos, la resultante se obtiene:", 
+            a: "Usando la regla del paralelogramo o cabeza-cola", 
+            options: [
+              "Sumando sus magnitudes directamente", 
+              "Usando la regla del paralelogramo o cabeza-cola", 
+              "Restando sus magnitudes"
+            ], 
+            explanation: [
+              "Incorrecto. No se suman directamente.", 
+              "Correcto. Se usan métodos gráficos o analíticos.", 
+              "Incorrecto. Restar solo aplica a colineales opuestos."
+            ] 
+          },
+          { 
+            q: "¿Cuál es el máximo valor que puede tener la resultante de dos vectores de 3N y 5N?", 
+            a: "8N", 
+            options: [
+              "2N", 
+              "8N", 
+              "5N"
+            ], 
+            explanation: [
+              "Incorrecto. Es el mínimo.", 
+              "Correcto. El máximo ocurre si son paralelos y en el mismo sentido (3+5).", 
+              "Incorrecto. Cinco es la magnitud mayor, no la suma máxima."
+            ] 
+          },
+          { 
+            q: "¿Cuál es el mínimo valor que puede tener la resultante de dos vectores de 10N y 4N?", 
+            a: "6N", 
+            options: [
+              "14N", 
+              "6N", 
+              "4N"
+            ], 
+            explanation: [
+              "Incorrecto. Es el máximo.", 
+              "Correcto. El mínimo ocurre si son opuestos (10-4).", 
+              "Incorrecto. Cuatro es la magnitud menor."
+            ] 
+          },
+          { 
+            q: "¿Qué método gráfico permite sumar múltiples vectores de forma consecutiva?", 
+            a: "Método del polígono (o cabeza-cola)", 
+            options: [
+              "Método del paralelogramo", 
+              "Método del polígono (o cabeza-cola)", 
+              "Método analítico"
+            ], 
+            explanation: [
+              "Incorrecto. El paralelogramo es para dos vectores.", 
+              "Correcto. El polígono es el método cabeza-cola extendido.", 
+              "Incorrecto. El analítico no es un método gráfico."
+            ] 
+          },
+          { 
+            q: "La suma de $\\mathbf{A}$ y $\\mathbf{B}$ es igual a la suma de $\\mathbf{B}$ y $\\mathbf{A}$. ¿Cómo se llama esta propiedad?", 
+            a: "Conmutativa", 
+            options: [
+              "Asociativa", 
+              "Distributiva", 
+              "Conmutativa"
+            ], 
+            explanation: [
+              "Incorrecto. La asociativa agrupa vectores.", 
+              "Incorrecto. La distributiva combina suma y multiplicación.", 
+              "Correcto. El orden de la suma no importa." 
+            ] 
+          },
+          { 
+            q: "Si la resultante de varias fuerzas es cero, ¿cómo se encuentra el sistema?", 
+            a: "En equilibrio", 
+            options: [
+              "Acelerando", 
+              "En equilibrio", 
+              "Con resultante máxima"
+            ], 
+            explanation: [
+              "Incorrecto. La aceleración implica una fuerza neta.", 
+              "Correcto. Fuerza neta (resultante) cero significa equilibrio.", 
+              "Incorrecto. Máxima significa gran fuerza neta."
+            ] 
+          },
+          { 
+            q: "Para la suma de vectores perpendiculares se puede usar directamente:", 
+            a: "El Teorema de Pitágoras", 
+            options: [
+              "La Ley de Senos", 
+              "El Teorema de Pitágoras", 
+              "La Regla de la mano derecha"
+            ], 
+            explanation: [
+              "Incorrecto. Senos se usa para triángulos no rectángulos.", 
+              "Correcto. $R = \\sqrt{A^2 + B^2}$ para $\\mathbf{A} \\perp \\mathbf{B}$.", 
+              "Incorrecto. Es para producto vectorial."
+            ] 
+          },
+          { 
+            q: "Si dos vectores tienen una resultante de 0, ¿qué se puede afirmar?", 
+            a: "Son colineales, de igual magnitud y sentido opuesto", 
+            options: [
+              "Son perpendiculares", 
+              "Tienen diferente magnitud", 
+              "Son colineales, de igual magnitud y sentido opuesto"
+            ], 
+            explanation: [
+              "Incorrecto. Su resultante sería una hipotenusa.", 
+              "Incorrecto. Deben tener la misma magnitud.", 
+              "Correcto. Necesitan cancelarse por completo."
+            ] 
+          }
+        ]
+      },
+      3: {
+        title: "Vectores Equilibrantes",
+        description: "Aprende a identificar vectores equilibrantes y su uso. (10 preguntas)",
+        questions: [
+          { 
+            q: "El vector equilibrante tiene la misma magnitud que la resultante pero:", 
+            a: "Sentido opuesto", 
+            options: [
+              "Sentido opuesto", 
+              "Misma dirección", 
+              "Ninguna relación"
+            ], 
+            explanation: [
+              "Correcto. El equilibrante se usa para balancear fuerzas y apunta en sentido contrario a la resultante.", 
+              "Incorrecto. No tiene la misma dirección que la resultante, sino opuesta.", 
+              "Incorrecto. Sí existe una relación directa: equilibra la resultante."
+            ] 
+          },
+          { 
+            q: "¿Para qué se utiliza un vector equilibrante?", 
+            a: "Para equilibrar fuerzas", 
+            options: [
+              "Para aumentar fuerza", 
+              "Para equilibrar fuerzas", 
+              "Para medir ángulos"
+            ], 
+            explanation: [
+              "Incorrecto. No se usa para aumentar la fuerza.", 
+              "Correcto. El equilibrante se aplica para que el sistema quede en equilibrio.", 
+              "Incorrecto. No se usa para medir ángulos, su función es física."
+            ] 
+          },
+          { 
+            q: "Si tres vectores se suman y se desea que el sistema quede en equilibrio, el equilibrante:", 
+            a: "Debe tener magnitud igual a la resultante de los tres vectores y sentido opuesto", 
+            options: [
+              "Debe ser cero", 
+              "Debe tener magnitud igual a la resultante de los tres vectores y sentido opuesto", 
+              "Debe apuntar al mismo ángulo que uno de los vectores"
+            ], 
+            explanation: [
+              "Incorrecto. El equilibrante nunca será cero a menos que la resultante ya sea cero.", 
+              "Correcto. Para equilibrar, debe tener magnitud igual a la resultante y sentido opuesto.", 
+              "Incorrecto. No basta con apuntar igual que uno de los vectores."
+            ] 
+          },
+          { 
+            q: "Si la resultante está a $45°$ y tiene magnitud 10N, el equilibrante debe estar a:", 
+            a: "$225°$", 
+            options: [
+              "$45°$", 
+              "$135°$", 
+              "$225°$"
+            ], 
+            explanation: [
+              "Incorrecto. Misma dirección.", 
+              "Incorrecto. Sería perpendicular.", 
+              "Correcto. $45° + 180° = 225°$ (sentido opuesto)." 
+            ] 
+          },
+          { 
+            q: "El experimento de la **Mesa de Fuerzas** tiene como objetivo principal encontrar el vector:", 
+            a: "Equilibrante", 
+            options: [
+              "Unitario", 
+              "Equilibrante", 
+              "Nulo"
+            ], 
+            explanation: [
+              "Incorrecto. No es el unitario.", 
+              "Correcto. Se busca la fuerza que equilibra al sistema de vectores.", 
+              "Incorrecto. No es el vector nulo."
+            ] 
+          },
+          { 
+            q: "Al añadir el vector equilibrante a un sistema de vectores, la suma total de fuerzas debe ser:", 
+            a: "Nula", 
+            options: [
+              "Máxima", 
+              "Nula", 
+              "El doble de la resultante"
+            ], 
+            explanation: [
+              "Incorrecto. La suma debe ser cero.", 
+              "Correcto. Para lograr el equilibrio, la suma vectorial es cero.", 
+              "Incorrecto. Debe ser cero."
+            ] 
+          },
+          { 
+            q: "¿Cómo se relaciona el equilibrante con el método analítico?", 
+            a: "Se calcula primero la resultante ($\\mathbf{R}$), luego el equilibrante es $-\\mathbf{R}$", 
+            options: [
+              "Se usa la ley de senos para calcularlo", 
+              "Se calcula primero la resultante ($\\mathbf{R}$), luego el equilibrante es $-\\mathbf{R}$", 
+              "Se usa el producto punto"
+            ], 
+            explanation: [
+              "Incorrecto. Es un método analítico diferente.", 
+              "Correcto. El equilibrante es el vector opuesto a la resultante.", 
+              "Incorrecto. El producto punto no sirve para esto."
+            ] 
+          },
+          { 
+            q: "Si $\\mathbf{A} + \\mathbf{B} = \\mathbf{R}$, entonces el equilibrante $\\mathbf{E}$ es igual a:", 
+            a: "$-\\mathbf{R}$", 
+            options: [
+              "$2\\mathbf{R}$", 
+              "$-\\mathbf{R}$", 
+              "$\\mathbf{R}/2$"
+            ], 
+            explanation: [
+              "Incorrecto.", 
+              "Correcto. El equilibrante es el negativo de la resultante.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "¿En qué ley de Newton se basa el concepto de equilibrio de fuerzas?", 
+            a: "Primera Ley de Newton (Inercia)", 
+            options: [
+              "Primera Ley de Newton (Inercia)", 
+              "Segunda Ley de Newton (F=ma)", 
+              "Tercera Ley de Newton (Acción-Reacción)"
+            ], 
+            explanation: [
+              "Correcto. La Primera Ley establece que la fuerza neta es cero en equilibrio.", 
+              "Incorrecto. La Segunda Ley trata de la aceleración.", 
+              "Incorrecto. La Tercera Ley trata de pares de fuerzas."
+            ] 
+          },
+          { 
+            q: "El equilibrante siempre tendrá un ángulo de diferencia de $180°$ con respecto a:", 
+            a: "El vector resultante", 
+            options: [
+              "El vector unitario", 
+              "El vector con mayor magnitud", 
+              "El vector resultante"
+            ], 
+            explanation: [
+              "Incorrecto. Es una relación con la resultante.", 
+              "Incorrecto.", 
+              "Correcto. El equilibrante es opuesto a la resultante."
+            ] 
+          }
+        ]
+      },
+      4: {
+        title: "Producto Punto y Escalares",
+        description: "Conceptos sobre multiplicación de vectores y su resultado escalar. (10 preguntas)",
+        questions: [
+          { 
+            q: "¿Qué resultado se obtiene de un producto punto de dos vectores?", 
+            a: "Un escalar", 
+            options: [
+              "Un vector", 
+              "Un escalar", 
+              "Un vector unitario"
+            ], 
+            explanation: [
+              "Incorrecto. El producto vectorial da un vector.", 
+              "Correcto. El producto punto (escalar) da un número (magnitud).", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "¿Para qué se utiliza el producto punto en física?", 
+            a: "Para calcular el trabajo (Work)", 
+            options: [
+              "Para calcular la torsión (Torque)", 
+              "Para calcular el trabajo (Work)", 
+              "Para encontrar la dirección de la aceleración"
+            ], 
+            explanation: [
+              "Incorrecto. Eso es producto cruz.", 
+              "Correcto. $W = \\mathbf{F} \\cdot \\mathbf{d}$.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "Si dos vectores son perpendiculares, ¿cuál es el valor de su producto punto?", 
+            a: "Cero", 
+            options: [
+              "Uno", 
+              "Cero", 
+              "Su magnitud máxima"
+            ], 
+            explanation: [
+              "Incorrecto. Uno es para unitarios paralelos.", 
+              "Correcto. $\\cos(90°)=0$.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "La fórmula del producto punto en coordenadas es:", 
+            a: "$\\mathbf{A} \\cdot \\mathbf{B} = A_x B_x + A_y B_y$", 
+            options: [
+              "$\\mathbf{A} \\cdot \\mathbf{B} = A_x B_y - A_y B_x$", 
+              "$\\mathbf{A} \\cdot \\mathbf{B} = A_x B_x + A_y B_y$", 
+              "$|\\mathbf{A}| |\\mathbf{B}| \sin(\\theta)$"
+            ], 
+            explanation: [
+              "Incorrecto. Es parte del producto cruz.", 
+              "Correcto. Se multiplican las componentes y se suman.", 
+              "Incorrecto. Es la magnitud del producto cruz."
+            ] 
+          },
+          { 
+            q: "Si el producto punto de dos vectores es negativo, ¿qué se puede deducir sobre el ángulo entre ellos?", 
+            a: "Es mayor a $90°$", 
+            options: [
+              "Es $0°$", 
+              "Es $90°$", 
+              "Es mayor a $90°$"
+            ], 
+            explanation: [
+              "Incorrecto. $\\cos(0)=1$.", 
+              "Incorrecto. $\\cos(90)=0$.", 
+              "Correcto. El coseno es negativo en el II y III cuadrante."
+            ] 
+          },
+          { 
+            q: "¿Cuál es la otra forma de calcular el producto punto?", 
+            a: "$|\\mathbf{A}| |\\mathbf{B}| \cos(\\theta)$", 
+            options: [
+              "$|\\mathbf{A}| |\\mathbf{B}| \sin(\\theta)$", 
+              "$|\\mathbf{A}| |\\mathbf{B}| \cos(\\theta)$", 
+              "$|\\mathbf{A}| + |\\mathbf{B}|$"
+            ], 
+            explanation: [
+              "Incorrecto. Es para producto cruz.", 
+              "Correcto. Es la definición geométrica.", 
+              "Incorrecto. Es la suma de magnitudes."
+            ] 
+          },
+          { 
+            q: "¿Qué propiedad cumple el producto punto?", 
+            a: "Conmutativa", 
+            options: [
+              "No cumple ninguna propiedad", 
+              "Conmutativa", 
+              "Anticonmutativa"
+            ], 
+            explanation: [
+              "Incorrecto.", 
+              "Correcto. $\\mathbf{A} \\cdot \\mathbf{B} = \\mathbf{B} \\cdot \\mathbf{A}$.", 
+              "Incorrecto. Anticonmutativa es para producto cruz."
+            ] 
+          },
+          { 
+            q: "El producto punto $\\mathbf{i} \\cdot \\mathbf{i}$ es igual a:", 
+            a: "1", 
+            options: [
+              "0", 
+              "1", 
+              "$\\mathbf{k}$"
+            ], 
+            explanation: [
+              "Incorrecto. Es cero para $\\mathbf{i} \\cdot \\mathbf{j}$.", 
+              "Correcto. Vectores unitarios paralelos dan 1.", 
+              "Incorrecto. Sería producto cruz."
+            ] 
+          },
+          { 
+            q: "El producto punto $\\mathbf{i} \\cdot \\mathbf{j}$ es igual a:", 
+            a: "0", 
+            options: [
+              "1", 
+              "0", 
+              "$\\mathbf{k}$"
+            ], 
+            explanation: [
+              "Incorrecto. Es para $\\mathbf{i} \\cdot \\mathbf{i}$.", 
+              "Correcto. Vectores unitarios perpendiculares dan 0.", 
+              "Incorrecto. Sería producto cruz."
+            ] 
+          },
+          { 
+            q: "Si un vector $\\mathbf{V}$ se multiplica por un escalar $k>1$, el resultado es un vector:", 
+            a: "De mayor magnitud", 
+            options: [
+              "De menor magnitud", 
+              "De mayor magnitud", 
+              "En sentido opuesto"
+            ], 
+            explanation: [
+              "Incorrecto. Sería si $0<k<1$.", 
+              "Correcto. La magnitud aumenta en un factor de $k$.", 
+              "Incorrecto. Sería si $k$ fuera negativo."
+            ] 
+          }
+        ]
+      },
+      5: {
+        title: "Descomposición de Vectores (Componentes)",
+        description: "Prueba tu conocimiento sobre las componentes rectangulares y su cálculo. (10 preguntas)",
+        questions: [
+          { 
+            q: "¿Cuál es la componente $x$ de un vector $\\mathbf{V}$ con ángulo $\\theta$?", 
+            a: "$V \\cos(\\theta)$", 
+            options: [
+              "$V \\sin(\\theta)$", 
+              "$V \\cos(\\theta)$", 
+              "$V \\tan(\\theta)$"
+            ], 
+            explanation: [
+              "Incorrecto. Esta es la componente $y$.", 
+              "Correcto. La componente $x$ (adyacente) usa el coseno.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "¿Cuál es la componente $y$ de un vector $\\mathbf{V}$ con ángulo $\\theta$?", 
+            a: "$V \\sin(\\theta)$", 
+            options: [
+              "$V \\cos(\\theta)$", 
+              "$V \\sin(\\theta)$", 
+              "$V / \\cos(\\theta)$"
+            ], 
+            explanation: [
+              "Incorrecto. Esta es la componente $x$.", 
+              "Correcto. La componente $y$ (opuesta) usa el seno.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "Para un vector de $10N$ a $90°$, ¿cuál es su componente $x$?", 
+            a: "$0N$", 
+            options: [
+              "$10N$", 
+              "$0N$", 
+              "$5N$"
+            ], 
+            explanation: [
+              "Incorrecto. La componente $y$ es $10N$.", 
+              "Correcto. $\\cos(90°) = 0$.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "Para un vector de $5N$ a $180°$, ¿cuál es su componente $x$?", 
+            a: "$-5N$", 
+            options: [
+              "$5N$", 
+              "$0N$", 
+              "$-5N$"
+            ], 
+            explanation: [
+              "Incorrecto. Es $-5N$.", 
+              "Incorrecto. La componente $y$ es $0N$.", 
+              "Correcto. $\\cos(180°) = -1$, entonces $5N \\times (-1) = -5N$."
+            ] 
+          },
+          { 
+            q: "Un vector tiene componentes $V_x=3$ y $V_y=4$. ¿Cuál es su magnitud?", 
+            a: "$5$", 
+            options: [
+              "$7$", 
+              "$5$", 
+              "$12$"
+            ], 
+            explanation: [
+              "Incorrecto. Es la suma.", 
+              "Correcto. $\\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "¿La función trigonométrica usada para calcular el ángulo $\\theta$ dada $V_x$ y $V_y$ es?", 
+            a: "Arcotangente ($\\arctan$)", 
+            options: [
+              "Arcocoseno ($\\arccos$)", 
+              "Arcotangente ($\\arctan$)", 
+              "Arcoseno ($\\arcsin$)"
+            ], 
+            explanation: [
+              "Incorrecto.", 
+              "Correcto. $\\theta = \\arctan(V_y/V_x)$.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "La suma de vectores usando componentes se realiza sumando:", 
+            a: "Todas las componentes $x$ juntas y todas las $y$ juntas", 
+            options: [
+              "Las magnitudes directamente", 
+              "Todas las componentes $x$ juntas y todas las $y$ juntas", 
+              "Las magnitudes y los ángulos por separado"
+            ], 
+            explanation: [
+              "Incorrecto. Solo si son colineales.", 
+              "Correcto. Se suman escalares en cada eje.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "Si un vector apunta exactamente a $270°$, ¿cuál es el signo de su componente $y$?", 
+            a: "Negativo", 
+            options: [
+              "Positivo", 
+              "Cero", 
+              "Negativo"
+            ], 
+            explanation: [
+              "Incorrecto. $90°$ y $0-90°$.", 
+              "Incorrecto. $0°$ y $180°$.", 
+              "Correcto. Apunta hacia abajo."
+            ] 
+          },
+          { 
+            q: "La suma de las componentes $x$ de un sistema es $R_x$. ¿Cómo se llama el proceso de encontrar $R_x$ y $R_y$?", 
+            a: "Método analítico (o de componentes)", 
+            options: [
+              "Método del polígono", 
+              "Método analítico (o de componentes)", 
+              "Método de escalado"
+            ], 
+            explanation: [
+              "Incorrecto. Es gráfico.", 
+              "Correcto. Es el método más preciso.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "Para calcular la resultante $R$ con componentes $R_x$ y $R_y$, se usa la fórmula:", 
+            a: "$R = \\sqrt{R_x^2 + R_y^2}$", 
+            options: [
+              "$R = R_x + R_y$", 
+              "$R = R_x \\cdot R_y$", 
+              "$R = \\sqrt{R_x^2 + R_y^2}$"
+            ], 
+            explanation: [
+              "Incorrecto. Solo si son colineales.", 
+              "Incorrecto. Es un producto.", 
+              "Correcto. Teorema de Pitágoras."
+            ] 
+          }
+        ]
+      },
+      6: {
+        title: "Vectores en la Vida Real (Aplicaciones)",
+        description: "Aplica los conceptos de vectores a situaciones cotidianas y físicas. (10 preguntas)",
+        questions: [
+          { 
+            q: "¿Qué magnitud vectorial describe el cambio de posición?", 
+            a: "Desplazamiento", 
+            options: [
+              "Distancia", 
+              "Desplazamiento", 
+              "Rapidez"
+            ], 
+            explanation: [
+              "Incorrecto. Distancia es escalar.", 
+              "Correcto. El desplazamiento es un vector.", 
+              "Incorrecto. Rapidez es escalar."
+            ] 
+          },
+          { 
+            q: "Para un avión, ¿la magnitud de la velocidad relativa al suelo es la suma vectorial de?", 
+            a: "Velocidad del avión y velocidad del viento", 
+            options: [
+              "Velocidad del avión y la altura", 
+              "Velocidad del avión y velocidad del viento", 
+              "Solo la velocidad del avión"
+            ], 
+            explanation: [
+              "Incorrecto. La altura es escalar.", 
+              "Correcto. Es una suma vectorial.", 
+              "Incorrecto. Se debe incluir el viento."
+            ] 
+          },
+          { 
+            q: "Un marinero tira de una cuerda para mover un bote. ¿Qué componente de su fuerza realiza el trabajo efectivo?", 
+            a: "La componente horizontal (paralela al movimiento)", 
+            options: [
+              "La componente vertical (perpendicular al movimiento)", 
+              "La componente horizontal (paralela al movimiento)", 
+              "La fuerza total aplicada"
+            ], 
+            explanation: [
+              "Incorrecto. La vertical se anula con la flotación.", 
+              "Correcto. Solo la fuerza paralela a la dirección del movimiento realiza trabajo.", 
+              "Incorrecto. Solo la componente paralela es efectiva."
+            ] 
+          },
+          { 
+            q: "Cuando juegas al billar y golpeas una bola, ¿qué vector determina la trayectoria de la bola?", 
+            a: "El impulso inicial (cambio de momento)", 
+            options: [
+              "La masa de la bola", 
+              "El impulso inicial (cambio de momento)", 
+              "La fricción de la mesa"
+            ], 
+            explanation: [
+              "Incorrecto. La masa es escalar.", 
+              "Correcto. El impulso es $\\mathbf{J} = \\Delta \\mathbf{p}$, un vector.", 
+              "Incorrecto. La fricción lo reduce, pero no determina la trayectoria inicial."
+            ] 
+          },
+          { 
+            q: "Al empujar una caja por el suelo, la fuerza de rozamiento (fricción) es un vector que se opone al vector de:", 
+            a: "Velocidad o movimiento", 
+            options: [
+              "Fuerza normal", 
+              "Gravedad", 
+              "Velocidad o movimiento"
+            ], 
+            explanation: [
+              "Incorrecto. La normal es perpendicular.", 
+              "Incorrecto. La gravedad es vertical.", 
+              "Correcto. La fricción siempre se opone a la dirección del movimiento."
+            ] 
+          },
+          { 
+            q: "Para subir una maleta por una rampa, se requiere menos fuerza que al levantarla verticalmente. Esto se debe a que la fuerza requerida es una **componente** de:", 
+            a: "El peso", 
+            options: [
+              "El peso", 
+              "La fuerza normal", 
+              "La fricción"
+            ], 
+            explanation: [
+              "Correcto. La fuerza que hace deslizar la maleta por la rampa es $W \\sin(\\theta)$.", 
+              "Incorrecto. La normal es perpendicular.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "¿Qué vector se mantiene constante en un movimiento parabólico (sin considerar el aire)?", 
+            a: "Aceleración (Gravedad)", 
+            options: [
+              "Velocidad horizontal", 
+              "Aceleración (Gravedad)", 
+              "Velocidad vertical"
+            ], 
+            explanation: [
+              "Incorrecto. La velocidad horizontal es constante, pero no es el vector más relevante aquí.", 
+              "Correcto. La aceleración es $\\mathbf{g}$, constante y hacia abajo.", 
+              "Incorrecto. La velocidad vertical cambia."
+            ] 
+          },
+          { 
+            q: "En un mapa de navegación, ¿qué vector representa la dirección y distancia para ir de un punto A a un punto B?", 
+            a: "Vector posición relativa", 
+            options: [
+              "La escala del mapa", 
+              "La distancia euclidiana", 
+              "Vector posición relativa"
+            ], 
+            explanation: [
+              "Incorrecto. La escala es una relación de números.", 
+              "Incorrecto. La distancia euclidiana es la magnitud.", 
+              "Correcto. La posición relativa es el desplazamiento vectorial."
+            ] 
+          },
+          { 
+            q: "El campo eléctrico $\\mathbf{E}$ y el campo magnético $\\mathbf{B}$ son magnitudes:", 
+            a: "Vectoriales", 
+            options: [
+              "Escalares", 
+              "Vectoriales", 
+              "Mixtas"
+            ], 
+            explanation: [
+              "Incorrecto.", 
+              "Correcto. Tienen dirección y magnitud.", 
+              "Incorrecto."
+            ] 
+          },
+          { 
+            q: "Al girar un volante, ¿qué vector representa la tendencia a causar rotación?", 
+            a: "Torque (Momento de Fuerza)", 
+            options: [
+              "Fuerza normal", 
+              "Peso", 
+              "Torque (Momento de Fuerza)"
+            ], 
+            explanation: [
+              "Incorrecto. La normal es perpendicular.", 
+              "Incorrecto. El peso es vertical.", 
+              "Correcto. El torque es el producto cruz de la posición y la fuerza."
+            ] 
+          }
+        ]
+      }
+    };
 
-    // Obtener id del quiz desde URL
-    const params = new URLSearchParams(window.location.search);
-    const quizId = params.get("id");
-    const quiz = quizzes[quizId];
+    // ... (El resto del código JavaScript sigue igual)
 
-    const titleEl = document.getElementById("quizTitle");
-    const descEl = document.getElementById("quizDescription");
-    const form = document.getElementById("quizForm");
-    const resultBox = document.getElementById("resultBox");
-    const scoreText = document.getElementById("scoreText");
+    // Obtener id del quiz desde URL
+    const params = new URLSearchParams(window.location.search);
+    const quizId = params.get("id");
+    const quiz = quizzes[quizId];
 
-    if (!quiz) {
-      titleEl.textContent = "Quiz no encontrado";
-      form.innerHTML = "<p>El quiz que buscas no existe.</p>";
-    } else {
-      titleEl.textContent = `Quiz ${quizId}: ${quiz.title}`;
-      descEl.textContent = quiz.description;
+    const titleEl = document.getElementById("quizTitle");
+    const descEl = document.getElementById("quizDescription");
+    const form = document.getElementById("quizForm");
+    const resultBox = document.getElementById("resultBox");
+    const scoreText = document.getElementById("scoreText");
 
-      // Crear preguntas dinámicamente
-      quiz.questions.forEach((q, i) => {
-        const div = document.createElement("div");
-        div.classList.add("question");
-        div.innerHTML = `<h3>${i + 1}️) ${q.q}</h3>`;
+    if (!quiz) {
+      titleEl.textContent = "Quiz no encontrado";
+      form.innerHTML = "<p>El quiz que buscas no existe.</p>";
+    } else {
+      titleEl.textContent = `Quiz ${quizId}: ${quiz.title}`;
+      descEl.textContent = quiz.description;
 
-        q.options.forEach((opt, idx) => {
-          div.innerHTML += `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`;
-        });
+      // Crear preguntas dinámicamente
+      quiz.questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.classList.add("question");
+        div.innerHTML = `<h3>${i + 1}️) ${q.q}</h3>`;
 
-        // Div donde se mostrará la retroalimentación
-        const feedbackDiv = document.createElement("div");
-        feedbackDiv.classList.add("feedback");
-        feedbackDiv.style.marginTop = "8px";
-        feedbackDiv.style.fontStyle = "italic";
-        div.appendChild(feedbackDiv);
+        q.options.forEach((opt, idx) => {
+          div.innerHTML += `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`;
+        });
 
-        form.appendChild(div);
-      });
+        // Div donde se mostrará la retroalimentación
+        const feedbackDiv = document.createElement("div");
+        feedbackDiv.classList.add("feedback");
+        feedbackDiv.style.marginTop = "8px";
+        feedbackDiv.style.fontStyle = "italic";
+        div.appendChild(feedbackDiv);
 
-      // Botón de enviar
-      const submitBtn = document.createElement("button");
-      submitBtn.type = "submit";
-      submitBtn.classList.add("btn-primary");
-      submitBtn.textContent = "Comprobar Respuestas";
-      form.appendChild(submitBtn);
+        form.appendChild(div);
+      });
 
-      // Evento submit
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        let score = 0;
+      // Botón de enviar
+      const submitBtn = document.createElement("button");
+      submitBtn.type = "submit";
+      submitBtn.classList.add("btn-primary");
+      submitBtn.textContent = "Comprobar Respuestas";
+      form.appendChild(submitBtn);
 
-        quiz.questions.forEach((q, i) => {
-          const selected = form.querySelector(`input[name="q${i}"]:checked`);
-          const div = form.querySelector(`input[name="q${i}"]`).closest(".question");
-          const feedbackDiv = div.querySelector(".feedback");
-          div.classList.remove("correct", "incorrect");
+      // Evento submit
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let score = 0;
 
-          if (selected) {
-            if (selected.value === q.a) {
-              score++;
-              div.classList.add("correct");
-            } else {
-              div.classList.add("incorrect");
-            }
+        quiz.questions.forEach((q, i) => {
+          const selected = form.querySelector(`input[name="q${i}"]:checked`);
+          const div = form.querySelector(`input[name="q${i}"]`).closest(".question");
+          const feedbackDiv = div.querySelector(".feedback");
+          div.classList.remove("correct", "incorrect");
 
-            // Buscar índice de la opción seleccionada para mostrar explicación
-            const selectedIndex = q.options.indexOf(selected.value);
-            feedbackDiv.textContent = q.explanation[selectedIndex];
-            feedbackDiv.style.color = selected.value === q.a ? "green" : "red";
-          }
-        });
+          if (selected) {
+            if (selected.value === q.a) {
+              score++;
+              div.classList.add("correct");
+            } else {
+              div.classList.add("incorrect");
+            }
 
-        const percent = Math.round((score / quiz.questions.length) * 100);
-        scoreText.textContent = `Tu puntaje es ${score}/${quiz.questions.length} (${percent}%)`;
-        resultBox.classList.remove("hidden");
-        window.scrollTo({ top: resultBox.offsetTop, behavior: 'smooth' });
-      });
+            // Buscar índice de la opción seleccionada para mostrar explicación
+            const selectedIndex = q.options.indexOf(selected.value);
+            feedbackDiv.textContent = q.explanation[selectedIndex];
+            feedbackDiv.style.color = selected.value === q.a ? "green" : "red";
+          }
+        });
 
-    }
-  </script>
+        const percent = Math.round((score / quiz.questions.length) * 100);
+        scoreText.textContent = `Tu puntaje es ${score}/${quiz.questions.length} (${percent}%)`;
+        resultBox.classList.remove("hidden");
+        window.scrollTo({ top: resultBox.offsetTop, behavior: 'smooth' });
+      });
+
+    }
+  </script>
 </body>
 
 </html>

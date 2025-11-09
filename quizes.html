@@ -30,37 +30,52 @@
   </footer>
 
   <script>
-    // Array con los quizes disponibles
-    const quizzes = [
-      {
-        id: 1,
-        title: "Conceptos Básicos",
-        description: "Test sobre magnitud, dirección y tipos de vectores."
-      },
-      {
-        id: 2,
-        title: "Suma y Resultantes",
-        description: "Prueba tus habilidades calculando resultantes de vectores."
-      },
-      {
-        id: 3,
-        title: "Vectores Equilibrantes",
-        description: "Aprende a identificar vectores equilibrantes y su uso."
-      }
-    ];
+    // Array con los quizes disponibles - ¡AÑADIDOS NUEVOS TEMAS!
+    const quizzes = [
+      {
+        id: 1,
+        title: "Conceptos Básicos",
+        description: "Test sobre magnitud, dirección y tipos de vectores. (10 preguntas)"
+      },
+      {
+        id: 2,
+        title: "Suma y Resultantes",
+        description: "Prueba tus habilidades calculando resultantes de vectores. (10 preguntas)"
+      },
+      {
+        id: 3,
+        title: "Vectores Equilibrantes",
+        description: "Aprende a identificar vectores equilibrantes y su uso. (10 preguntas)"
+      },
+      {
+        id: 4,
+        title: "Producto Punto y Escalares",
+        description: "Conceptos sobre multiplicación de vectores y su resultado escalar. (10 preguntas)"
+      },
+      {
+        id: 5,
+        title: "Descomposición de Vectores",
+        description: "Prueba tu conocimiento sobre las componentes rectangulares y su cálculo. (10 preguntas)"
+      },
+      {
+        id: 6,
+        title: "Vectores en la Vida Real",
+        description: "Aplica los conceptos de vectores a situaciones cotidianas y físicas. (10 preguntas)"
+      }
+    ];
 
-    const quizList = document.getElementById("quizList");
+    const quizList = document.getElementById("quizList");
 
-    quizzes.forEach(q => {
-      const card = document.createElement("div");
-      card.classList.add("quiz-card");
-      card.innerHTML = `
-        <h3>Quiz ${q.id}: ${q.title}</h3>
-        <p>${q.description}</p>
-        <button onclick="window.location.href='quiz.html?id=${q.id}'" class="btn-primary">Iniciar Quiz</button>
-      `;
-      quizList.appendChild(card);
-    });
-  </script>
+    quizzes.forEach(q => {
+      const card = document.createElement("div");
+      card.classList.add("quiz-card");
+      card.innerHTML = `
+        <h3>Quiz ${q.id}: ${q.title}</h3>
+        <p>${q.description}</p>
+        <button onclick="window.location.href='quiz.html?id=${q.id}'" class="btn-primary">Iniciar Quiz</button>
+      `;
+      quizList.appendChild(card);
+    });
+  </script>
 </body>
 </html>
