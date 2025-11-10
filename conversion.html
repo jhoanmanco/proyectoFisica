@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades</title>
+    <link rel="stylesheet" href="style.css">
+
+    <body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/1467/1467136.png" alt="Logo Física" class="logo">
+            <h1> - Física Interactiva - </h1>
+        </div>
+        <p style="margin:0; font-size:1rem; font-weight:300;">Realiza conversiones</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="calculadora.html">Calculadora de vectores</a>
+            <a href="conversion.html">Conversion de unidades</a>
+            <a href="quizes.html">Quizzes</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="tab-container">
+            
+            <div id="conversor" class="tab-content">
+                <h2>Conversor de Sistemas de Medición</h2>
+                <p>Seleccione la magnitud física y luego las unidades para realizar la conversión.</p>
+
+                <div class="unit-converter-controls">
+                    <div class="input-group full-width-control">
+                        <label for="magnitudeSelect">Magnitud:</label>
+                        <select id="magnitudeSelect">
+                            <option value="Longitud">Longitud</option>
+                            <option value="Masa">Masa</option>
+                            <option value="Tiempo">Tiempo</option>
+                            <option value="Temperatura">Temperatura</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group full-width-control">
+                        <label for="inputValue">Valor:</label>
+                        <input type="number" id="inputValue" placeholder="Ingrese el valor">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="unitFrom">De:</label>
+                        <select id="unitFrom">
+
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="unitTo">A:</label>
+                        <select id="unitTo">
+
+                        </select>
+                    </div>
+
+                    <div id="conversionResult" class="result-display">
+                        El resultado aparecerá aquí
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Física Interactiva. Proyecto educativo sobre fundamentos y vectores.</p>
+    </footer>
+</body>
+
+    <script>
+        // Objeto de conversión de unidades
+        const conversionRates = {
+            // Conversiones de Longitud
+            'm': { 'km': 0.001, 'cm': 100, 'in': 39.3701, 'ft': 3.28084, 'mi': 0.000621371, 'm': 1 },
+            // Conversiones de Masa
+            'kg': { 'g': 1000, 'lb': 2.20462, 'oz': 35.274, 'ton': 0.001, 'kg': 1 },
+            // Conversiones de Tiempo
+            's': { 'min': 1 / 60, 'h': 1 / 3600, 'ms': 1000, 's': 1 },
+            // Conversiones de Temperatura
+            'C': { 'F': (val) => (val * 9 / 5) + 32, 'K': (val) => val + 273.15, 'C': (val) => val },
+            'F': { 'C': (val) => (val - 32) * 5 / 9, 'K': (val) => (val - 32) * 5 / 9 + 273.15, 'F': (val) => val },
+            'K': { 'C': (val) => val - 273.15, 'F': (val) => (val - 273.15) * 9 / 5 + 32, 'K': (val) => val }
+        };
+
+        // Función principal para convertir
+        function convertUnit() {
+            const valueInput = document.getElementById('inputValue');
+            const unitFromSelect = document.getElementById('unitFrom');
+            const unitToSelect = document.getElementById('unitTo');
+            const resultElement = document.getElementById('conversionResult');
+
+            const value = parseFloat(valueInput.value);
+            const unitFrom = unitFromSelect.value;
+            const unitTo = unitToSelect.value;
+            
+            if (isNaN(value) || valueInput.value === '') {
+                resultElement.innerHTML = 'El resultado aparecerá aquí';
+                return;
+            }
+
+            const magnitudeType = getMagnitudeType(unitFrom);
+
+            if (!magnitudeType) {
+                resultElement.innerHTML = 'Error: Unidad de origen no reconocida.';
+                return;
+            }
+
+            let result;
+
+            if (unitFrom === unitTo) {
+                result = value; 
+            } else if (magnitudeType === 'Temperatura') {
+                const converter = conversionRates[unitFrom][unitTo];
+                if (typeof converter === 'function') {
+                    result = converter(value);
+                } else {
+                    resultElement.innerHTML = 'Conversión de temperatura no válida.';
+                    return;
+                }
+            } else {
+                const baseUnit = getBaseUnit(unitFrom);
+                if (baseUnit === unitFrom) {
+                    const ratio = conversionRates[baseUnit][unitTo];
+                    result = value * ratio;
+                } else {
+                    const ratioToBase = conversionRates[baseUnit][unitFrom];
+                    const valueInBase = value / ratioToBase;
+                    const ratioToTarget = conversionRates[baseUnit][unitTo];
+                    result = valueInBase * ratioToTarget;
+                }
+            }
+
+            if (typeof result !== 'undefined' && !isNaN(result)) {
+                //Limpia ceros no significativos al final
+                resultElement.innerHTML = `<strong>Resultado:</strong> ${result.toFixed(6).replace(/\.?0+$/, '')} ${unitTo}`;
+            } else {
+                resultElement.innerHTML = 'Error en la conversión. Verifique las unidades.';
+            }
+        }
+
+        //Ayuda para obtener la magnitud y unidad base
+        function getMagnitudeType(unit) {
+            if (['m', 'km', 'cm', 'in', 'ft', 'mi'].includes(unit)) return 'Longitud';
+            if (['kg', 'g', 'lb', 'oz', 'ton'].includes(unit)) return 'Masa';
+            if (['s', 'min', 'h', 'ms'].includes(unit)) return 'Tiempo';
+            if (['C', 'F', 'K'].includes(unit)) return 'Temperatura';
+            return null;
+        }
+
+        function getBaseUnit(unit) {
+            if (['m', 'km', 'cm', 'in', 'ft', 'mi'].includes(unit)) return 'm';
+            if (['kg', 'g', 'lb', 'oz', 'ton'].includes(unit)) return 'kg';
+            if (['s', 'min', 'h', 'ms'].includes(unit)) return 's';
+            return unit; 
+        }
+
+        //Función para cambiar el contenido de las opciones de unidades (select)
+        function changeMagnitude(magnitude) {
+            const units = {
+                'Longitud': [
+                    { value: 'm', text: 'Metro (m)' },
+                    { value: 'km', text: 'Kilómetro (km)' },
+                    { value: 'cm', text: 'Centímetro (cm)' },
+                    { value: 'in', text: 'Pulgada (in)' },
+                    { value: 'ft', text: 'Pie (ft)' },
+                    { value: 'mi', text: 'Milla (mi)' }
+                ],
+                'Masa': [
+                    { value: 'kg', text: 'Kilogramo (kg)' },
+                    { value: 'g', text: 'Gramo (g)' },
+                    { value: 'lb', text: 'Libra (lb)' },
+                    { value: 'oz', text: 'Onza (oz)' },
+                    { value: 'ton', text: 'Tonelada (ton)' }
+                ],
+                'Tiempo': [
+                    { value: 's', text: 'Segundo (s)' },
+                    { value: 'min', text: 'Minuto (min)' },
+                    { value: 'h', text: 'Hora (h)' },
+                    { value: 'ms', text: 'Milisegundo (ms)' }
+                ],
+                'Temperatura': [
+                    { value: 'C', text: 'Celsius (°C)' },
+                    { value: 'F', text: 'Fahrenheit (°F)' },
+                    { value: 'K', text: 'Kelvin (K)' }
+                ]
+            };
+
+            const unitFromSelect = document.getElementById('unitFrom');
+            const unitToSelect = document.getElementById('unitTo');
+            const newOptions = units[magnitude] || [];
+
+            //Limpiar selectores
+            unitFromSelect.innerHTML = '';
+            unitToSelect.innerHTML = '';
+
+            //Llenar selectores con las nuevas opciones
+            newOptions.forEach(optionData => {
+                const optFrom = document.createElement('option');
+                optFrom.value = optionData.value;
+                optFrom.textContent = optionData.text;
+                unitFromSelect.appendChild(optFrom);
+
+                const optTo = document.createElement('option');
+                optTo.value = optionData.value;
+                optTo.textContent = optionData.text;
+                unitToSelect.appendChild(optTo);
+            });
+
+            //Limpiar resultado y valor
+            document.getElementById('conversionResult').innerHTML = 'El resultado aparecerá aquí';
+            document.getElementById('inputValue').value = '';
+        }
+
+        //Inicialización
+        window.onload = () => {
+            //Inicializar las unidades para la magnitud por defecto (Longitud)
+            changeMagnitude(document.getElementById('magnitudeSelect').value);
+
+            //Event listeners para la calculadora de conversión
+            document.getElementById('magnitudeSelect').addEventListener('change', (e) => changeMagnitude(e.target.value));
+            document.getElementById('inputValue').addEventListener('input', convertUnit);
+            document.getElementById('unitFrom').addEventListener('change', convertUnit);
+            document.getElementById('unitTo').addEventListener('change', convertUnit);
+        };
+    </script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+            margin: 0;
+        }
+
+        main {
+            flex-grow: 1; /* Esto empuja el footer hacia abajo */
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .tab-container {
+            max-width: 700px; 
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+</html>
