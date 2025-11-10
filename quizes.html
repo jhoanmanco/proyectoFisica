@@ -8,20 +8,25 @@
 </head>
 <body>
   <header class="navbar">
-    <h1>Física Interactiva</h1>
+    <div class="logo-container">
+    <img src="https://cdn-icons-png.flaticon.com/512/1467/1467136.png" alt="Logo Física" class="logo">
+    <h1> -  Física Interactiva - </h1>
+  </div>
+  <p style="margin:0; font-size:1rem; font-weight:300;">Prueba tus conocimientos</p>
     <nav>
       <a href="index.html">Inicio</a>
-      <a href="calculadora.html">Simulación</a>
+      <a href="calculadora.html">Calculadora de vectores</a>
+      <a href="conversion.html">Conversion de unidades</a>
+      <a href="quizes.html">Quizzes</a>
     </nav>
   </header>
 
-  
   <main class="content">
-    <h2> Elige un Quiz</h2>
-    <p>Selecciona uno de los quizes disponibles para practicar tus conocimientos sobre vectores.</p>
+    <h2>Elige un Quiz</h2>
+    <p>Selecciona uno de los quizes disponibles para practicar tus conocimientos de física.</p>
 
     <div id="quizList" class="quiz-list">
-      <!-- Las cards se llenarán dinámicamente -->
+      <!-- Las tarjetas se llenarán dinámicamente -->
     </div>
   </main>
 
@@ -30,52 +35,55 @@
   </footer>
 
   <script>
-    // Array con los quizes disponibles - ¡AÑADIDOS NUEVOS TEMAS!
-    const quizzes = [
-      {
-        id: 1,
-        title: "Conceptos Básicos",
-        description: "Test sobre magnitud, dirección y tipos de vectores. (10 preguntas)"
-      },
-      {
-        id: 2,
-        title: "Suma y Resultantes",
-        description: "Prueba tus habilidades calculando resultantes de vectores. (10 preguntas)"
-      },
-      {
-        id: 3,
-        title: "Vectores Equilibrantes",
-        description: "Aprende a identificar vectores equilibrantes y su uso. (10 preguntas)"
-      },
-      {
-        id: 4,
-        title: "Producto Punto y Escalares",
-        description: "Conceptos sobre multiplicación de vectores y su resultado escalar. (10 preguntas)"
-      },
-      {
-        id: 5,
-        title: "Descomposición de Vectores",
-        description: "Prueba tu conocimiento sobre las componentes rectangulares y su cálculo. (10 preguntas)"
-      },
-      {
-        id: 6,
-        title: "Vectores en la Vida Real",
-        description: "Aplica los conceptos de vectores a situaciones cotidianas y físicas. (10 preguntas)"
-      }
-    ];
+    // Lista de quizes actualizada según los temas reales
+    const quizzes = [
+      {
+        id: 1,
+        title: "Vectores y Conceptos Básicos",
+        description: "Test sobre magnitud, dirección, tipos de vectores y sus propiedades. (7 preguntas)"
+      },
+      {
+        id: 2,
+        title: "Magnitudes Físicas",
+        description: "Evalúa tus conocimientos sobre magnitudes escalares y vectoriales. (7 preguntas)"
+      },
+      {
+        id: 3,
+        title: "Sistemas de Medición",
+        description: "Comprueba tu comprensión sobre unidades y sistemas de medida. (7 preguntas)"
+      },
+      {
+        id: 4,
+        title: "Leyes del Movimiento de Newton",
+        description: "Evalúa tu entendimiento de las tres leyes de Newton. (7 preguntas)"
+      },
+      {
+        id: 5,
+        title: "Ejercicios: Suma de Vectores",
+        description: "Practica problemas simples de suma y resultantes de vectores. (7 preguntas)"
+      },
+      {
+        id: 6,
+        title: "Ejercicios: Cambios de Sistema de Medición",
+        description: "Aplica conversiones entre diferentes unidades de medida. (7 preguntas)"
+      }
+    ];
 
-    const quizList = document.getElementById("quizList");
+    // Render dinámico de las tarjetas de quizes
+    const quizList = document.getElementById("quizList");
 
-    quizzes.forEach(q => {
-      const card = document.createElement("div");
-      card.classList.add("quiz-card");
-      card.innerHTML = `
-        <h3>Quiz ${q.id}: ${q.title}</h3>
-        <p>${q.description}</p>
-        <button onclick="window.location.href='quiz.html?id=${q.id}'" class="btn-primary">Iniciar Quiz</button>
-      `;
-      quizList.appendChild(card);
-    });
-  </script>
+    quizzes.forEach(q => {
+      const card = document.createElement("div");
+      card.classList.add("quiz-card");
+      card.innerHTML = `
+        <h3>Quiz ${q.id}: ${q.title}</h3>
+        <p>${q.description}</p>
+        <button onclick="window.location.href='quiz.html?id=${q.id}'" class="btn-primary">
+          Iniciar Quiz
+        </button>
+      `;
+      quizList.appendChild(card);
+    });
+  </script>
 </body>
 </html>

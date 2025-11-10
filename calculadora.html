@@ -8,18 +8,24 @@
 </head>
 <body>
   <header class="navbar">
-    <h1>Calculadora Interactiva</h1>
-    <p style="margin:0; font-size:1rem; font-weight:300;">Simula, calcula y visualiza la resultante de varios vectores.</p>
+    <div class="logo-container">
+    <img src="https://cdn-icons-png.flaticon.com/512/1467/1467136.png" alt="Logo Física" class="logo">
+    <h1> -  Física Interactiva - </h1>
+  </div>
+    <p style="margin:0; font-size:1rem; font-weight:300;">Calcula y visualiza</p>
     <nav>
       <a href="index.html">Inicio</a>
-      <a href="quizes.html">Quizes</a>
+      <a href="calculadora.html">Calculadora de vectores</a>
+      <a href="conversion.html">Conversion de unidades</a>
+      <a href="quizes.html">Quizzes</a>
     </nav>
   </header>
 
   <main class="mesa">
+    <h2>Simulacion de fuerzas</h2>
     <section class="controls">
       <label>
-        <span>Fuerza (g):</span>
+        <span>Magnitud (g):</span>
         <input type="number" id="magnitude" value="0" min="0">
       </label>
 
@@ -51,7 +57,7 @@
     </section>
 
     <section>
-      <h2>Mesa Experimental</h2>
+      <h2>Visualización Vectorial</h2>
       <canvas id="forceTable" width="600" height="600"></canvas>
     </section>
 
@@ -62,7 +68,7 @@
     </section>
 
     <section>
-      <h2>Mesa Teórica (Diagrama cabeza-cola)</h2>
+      <h2>Cálculo Teórico y Gráfico</h2>
       <canvas id="resultCanvas" width="600" height="600" style="display:none;"></canvas>
     </section>
   </main>
