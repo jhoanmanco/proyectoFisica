@@ -43,7 +43,7 @@ function updateVectorTable() {
   // Dibujar la mesa circular (MODIFICADO: Menor radio para el círculo)
   function drawCircularTable(context) {
     const R_canvas = context.canvas.width / 2; // Radio total del canvas
-    const R_table = R_canvas * 0.6; // 🎯 AJUSTADO: Reducido a 60%
+    const R_table = R_canvas * 0.6;
     const c = { x: R_canvas, y: R_canvas };
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
@@ -92,7 +92,7 @@ function updateVectorTable() {
   function getScaleFactor(context, list, resultantMag = 0) {
     if (list.length === 0 && resultantMag === 0) return 1;
     // Radio de visualización efectivo. 0.7 asegura un buen margen.
-    const R = context.canvas.width / 2 * 0.7; // 🎯 AJUSTADO: Reducido a 70%
+    const R = context.canvas.width / 2 * 0.7; // 
     
     const allMags = list.map(v => v.magnitude);
     if (resultantMag > 0) {
