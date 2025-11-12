@@ -137,7 +137,7 @@ function updateVectorTable() {
       // Texto
       context.font = "bold 12px Segoe UI";
       context.fillStyle = "#000";
-      context.fillText(`F${i + 1} ${v.magnitude} g ${v.angle}°`, endX + 5, endY);
+      context.fillText(`F${i + 1} ${v.magnitude} N ${v.angle}°`, endX + 5, endY);
     });
   }
 
@@ -193,7 +193,7 @@ function updateVectorTable() {
 
       context.font = "bold 12px Segoe UI";
       context.fillStyle = "#000";
-      context.fillText(`F${i + 1} ${v.magnitude} g ${v.angle}°`, endX + 5, endY);
+      context.fillText(`F${i + 1} ${v.magnitude} N ${v.angle}°`, endX + 5, endY);
       start = { x: endX, y: endY };
     });
 
@@ -239,10 +239,10 @@ function updateVectorTable() {
     const resultant = Math.sqrt(sumX ** 2 + sumY ** 2);
     let angle = Math.atan2(sumY, sumX) * 180 / Math.PI;
 
-    // 🔧 Convertir ángulo negativo a positivo (0°–360°)
+    // Convertir ángulo negativo a positivo (0°–360°)
     if (angle < 0) angle += 360;
 
-    resultMag.textContent = `${resultant.toFixed(2)} g`;
+    resultMag.textContent = `${resultant.toFixed(2)} N`;
     resultAng.textContent = `${angle.toFixed(2)}°`;
 
     return { resultant, angle };
@@ -266,7 +266,7 @@ function updateVectorTable() {
     drawCircularTable(ctx);
     drawCircularTable(rctx);
     resultCanvas.style.display = "none";
-    resultMag.textContent = "0 g";
+    resultMag.textContent = "0 N";
     resultAng.textContent = "0°";
     updateVectorTable(); // Limpiar tabla también
 
